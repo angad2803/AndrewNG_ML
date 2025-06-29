@@ -1,0 +1,158 @@
+# Feature Scaling in Gradient Descent
+
+## Why Feature Scaling Matters
+
+In gradient descent, features with **very different ranges** can cause the cost function to form **elongated contours**, leading to **slow convergence**.
+
+### Example
+
+Consider predicting house price using:
+
+- **x₁**: Size in square feet (range: 300–2000)
+- **x₂**: Number of bedrooms (range: 0–5)
+
+Two scenarios:
+
+1. `w₁ = 50`, `w₂ = 0.1`, `b = 50` → Prediction is far from actual price.
+2. `w₁ = 0.1`, `w₂ = 50`, `b = 50` → Prediction is accurate.
+
+**Insight**:
+
+- Large-range features → smaller weights
+- Small-range features → larger weights
+
+## Problem with Gradient Descent
+
+Plotting the cost function using unscaled features leads to:
+
+- Contour plots shaped like **narrow ellipses**
+- Gradient descent **zigzags** and takes many steps to converge
+
+This is because:
+
+- Small changes in `w₁` (associated with large-range `x₁`) change predictions drastically
+- Large changes in `w₂` (associated with small-range `x₂`) barely affect predictions
+
+## Solution: Feature Scaling
+
+Rescale features so they have **similar ranges**, for example:
+
+- `x1` in `[0, 1]`
+- `x2` in `[0, 1]`
+
+Benefits:
+
+- Contours of cost function become **more circular**
+- Gradient descent can take **more direct steps** to the global minimum
+- **Faster and more stable convergence**
+
+## Summary
+
+- **Unscaled features** lead to inefficient, slow gradient descent.
+- **Feature scaling** transforms the feature space so all features contribute proportionately.
+- This helps gradient descent **converge faster and more reliably**.
+
+➡️ In the next step, you'll learn how to implement feature scaling in code.
+
+# Feature Scaling Techniques for Gradient Descent
+
+## Why Feature Scaling?
+
+Features with drastically different ranges (e.g., 0–5 vs. 0–2000) can cause:
+
+- **Inefficient training** due to skewed cost function contours
+- **Slow convergence** of gradient descent
+
+### Goal:
+
+Rescale features so they have **comparable ranges**, often around `[-1, 1]`.
+
+---
+
+## Scaling Methods
+
+### 1. **Simple Scaling (Min-Max to [0, 1])**
+
+Divide each feature value by its maximum:
+
+- For `x1` in `[300, 2000]`:
+  ```
+  x1_scaled = x1 / 2000    # Range: [0.15, 1]
+  ```
+- For `x2` in `[0, 5]`:
+  ```
+  x2_scaled = x2 / 5       # Range: [0, 1]
+  ```
+
+Useful for making features non-negative and bounded.
+
+---
+
+### 2. **Mean Normalization**
+
+Rescales values to be centered around zero:
+
+- Formula:
+  ```
+  xj_norm = (xj - mean_j) / (max_j - min_j)
+  ```
+- Example:
+  ```
+  mean_1 = 600
+  x1_norm = (x1 - 600) / (2000 - 300)    # Range: [-0.18, 0.82]
+  ```
+
+---
+
+### 3. **Z-Score Normalization (Standardization)**
+
+Rescales features to have mean = 0 and standard deviation = 1:
+
+- Formula:
+  ```
+  xj_z = (xj - mean_j) / std_j
+  ```
+- Example:
+
+  ```
+  mean_1 = 600
+  std_1 = 450
+  x1_z = (x1 - 600) / 450    # Range: [-0.67, 3.1]
+  ```
+
+- Common in ML pipelines and when input distribution is unknown
+
+---
+
+## Practical Tips
+
+- **Good range**: Try to get features roughly in `[-1, 1]`  
+  Acceptable ranges:
+
+  - `[-3, 3]`, `[-0.3, 0.3]` are fine
+  - Very large/small ranges (e.g. `[-100, 100]`, `[0.0001, 0.001]`) should be rescaled
+
+- **Temperature example**:  
+  Feature like body temp in °F (98.6–105) has a high absolute range → rescale it
+
+---
+
+## When to Apply Feature Scaling
+
+- **Always beneficial** for gradient-based methods like gradient descent
+- **No harm** in applying it, even if you’re unsure
+- Essential when features have very different scales
+
+---
+
+## Summary
+
+| Technique             | Centered at 0 | Scales Range | Handles Outliers? |
+| --------------------- | ------------- | ------------ | ----------------- |
+| Simple Scaling        | ❌            | ✅ [0, 1]    | ❌                |
+| Mean Normalization    | ✅            | ✅           | ❌                |
+| Z-Score Normalization | ✅            | ✅           | ✅ (to a degree)  |
+
+Use feature scaling to help gradient descent converge **faster and more reliably**.
+
+➡️ Next: Learn how to detect if gradient descent is **converging properly** and how to choose a good **learning rate**.
