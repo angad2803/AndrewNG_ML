@@ -162,3 +162,65 @@ b = temp_b
 ---
 
 ✅ You now know how to implement gradient descent for linear regression and why it works.
+
+# 🧠 Linear Regression with Gradient Descent – Summary
+
+## 📊 Linear Regression Recap
+
+- **Initial Parameters**:  
+  \( w = -0.1 \), \( b = 900 \)  
+  Prediction function: \( f(x) = -0.1x + 900 \)
+
+- **Gradient Descent in Action**:
+
+  - Parameters update step-by-step.
+  - Cost function \( J(w, b) \) reduces at each step.
+  - Line of best fit improves with each update.
+  - Final result: model reaches **global minimum**.
+
+- **Prediction Example**:
+  - Input: 1250 sq ft
+  - Output: ~\$250,000 house price estimate
+
+---
+
+## ⚙️ Batch Gradient Descent
+
+- **Definition**: Uses **all** training examples per update.
+- **Mathematical Note**:  
+  In gradient computation, the sum is over all \( m \) examples.
+- **Naming**:  
+  Inspired the name of DeepLearning.AI's newsletter: **The Batch**.
+- **Other Types**:
+  - **Stochastic Gradient Descent** (SGD)
+  - **Mini-Batch Gradient Descent**
+
+---
+
+## 🔬 Lab and Practice
+
+- Optional Lab:
+  - Gradient descent code review
+  - Cost vs iteration plot
+  - Contour plot of cost function
+- Practice Quizzes:
+  - Reinforce understanding
+  - Can retry multiple times
+
+---
+
+## ✅ End of Week 1
+
+### What You Learned:
+
+- Linear regression with one variable
+- Gradient descent for optimization
+- Visual intuition of cost minimization
+
+### Next Week:
+
+- Linear regression with **multiple features**
+- **Non-linear** function fitting
+- **Practical tips** for real-world ML
+
+> 🚀 You're on your way to becoming a machine learning practitioner!
