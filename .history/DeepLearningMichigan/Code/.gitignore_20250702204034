@@ -1,0 +1,15 @@
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.DS_Store
+.history/
+# Ignore large PDF files in LecNotes
+DeepLearningMichigan/LecNotes/*.pdf
