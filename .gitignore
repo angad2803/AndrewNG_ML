@@ -11,5 +11,3 @@ env.bak/
 venv.bak/
 .DS_Store
 .history/
-# Ignore the new folder
-New folder/
