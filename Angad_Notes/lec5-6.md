@@ -109,3 +109,23 @@ Most neural networks need nonconvex optimization:
 - Active area of research
 
   ![alt text](image-30.png)
+
+# Backpropagation
+
+**Problem: How to compute gradients?**
+
+![alt text](image-31.png)
+
+## Complete Computational Graph of the above problem
+
+![alt text](image-32.png)
+
+## Vector derivatives
+
+![alt text](image-33.png)
+
+During the backward pass, each node in the graph receives upstream gradientsand multiplies them by local gradients to compute downstream gradients
+
+The topic is very mathematical overall but easily implemented in pytorch (loss.backward())
+
+# Problem: So far our classifiers don’t respect the spatial structure of images! - Convolutional Neural Networks solve this problem
