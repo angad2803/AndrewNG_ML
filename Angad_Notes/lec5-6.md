@@ -80,3 +80,31 @@ With nonlinearity, each layer can bend and fold space differently, making it pro
 ![alt text](image-27.png)
 
 Neural networks use nonlinear activations to warp the input space so that complex, nonlinear class boundaries in the original space become simple, linear boundaries in the transformed space.
+
+## Universal Approximation
+
+**A neural network with one hidden layer can approximate any function f: RN -> RM with arbitrary precision**
+
+In plain words:
+
+Neural networks are universal function approximators.
+
+A neural network with just one hidden layer (but lots of neurons) can represent any function you care about. Each hidden neuron contributes a small nonlinear piece, and by combining enough of them, the network can “sculpt” arbitrarily complex functions. This is why neural networks are so powerful and why we call them universal approximators.
+![alt text](image-28.png)
+
+## Convex Functions
+
+**Intuition: A convex function is a (multidimensional) bowl**
+
+Generally speaking, convex functions are easy to optimize: can derive theoretical guarantees about converging to global minimum
+
+![alt text](image-29.png)
+
+Most neural networks need nonconvex optimization:
+
+- Few or no guarantees
+  about convergence
+- Empirically it seems to
+  work anyway
+- Active area of research
+  ![alt text](image-30.png)
