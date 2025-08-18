@@ -74,13 +74,14 @@ The multiclass SVM loss for a single example is:
 ```math
 L_i = \sum_{j \ne y_i} \max(0, s_j - s_{y_i} + 1)
 ```
+
 Where:
 
 - **\( L_i \)**: Loss for example \( i \)
 - **\( x_i \)**: Input image
 - **\( y_i \)**: True label (e.g., "dog")
 - **\( s = f(x_i, W) \)**: Vector of scores for all classes
-- **\( s_{y_i} \)**: Score for the correct class (\( y_i \), e.g., dog's score)
+- **\( s\_{y_i} \)**: Score for the correct class (\( y_i \), e.g., dog's score)
 - **\( s_j \)**: Score for some other class \( j \)
 - The sum is over all classes \( j \) not equal to the correct class \( y_i \)
 - The **margin** (here, 1) is a hyperparameter
@@ -123,3 +124,96 @@ SVM Loss (hinge) only cares about the margin — as long as the correct class is
 Cross-Entropy Loss always keeps pushing probabilities toward 1, never truly reaching 0 loss unless the probability is exactly 1 (which is impossible in finite scores).
 
 ![alt text](image-11.png)
+
+# Optimization
+
+The slope in any direction is the dot product of the direction with the gradient
+The direction of steepest descent is the negative gradient
+
+In practice we will compute dL/dW using backpropagation. (autograd , loss.backward()) - Lecture-6
+
+Pytorch func'n to check gradient:
+
+![alt text](image-12.png)
+
+## Gradient Descent
+
+Optimization algorithm to minimize a loss function
+
+Iteratively step in the direction of the negative gradient (direction of local steepest descent)
+
+Standard Gradient Descent computes the gradient using the entire dataset → very accurate but slow.
+Stochastic Gradient Descent (SGD) instead uses one (or a small batch of) training example(s) at a time
+
+![alt text](image-13.png)
+
+### If the loss changes fast in one direction and slow in another, vanilla SGD zig-zags and converges slowly.
+
+### This is caused by a high condition number (elongated valleys).
+
+![alt text](image-14.png)
+
+### Solutions = momentum, adaptive optimizers, normalization tricks.
+
+What if the loss function has a local minimum or saddle point? - Zero gradient, gradient descent gets stuck
+
+## SGD + momentum
+
+![alt text](image-15.png)
+
+Think of rolling a ball:
+
+Gradient = slope of the hill.
+
+Momentum = ball’s velocity.
+
+Friction = factor ρ (decay, so velocity doesn’t grow forever).
+
+The ball speeds up when slopes keep pointing downhill in the same direction, but smooths out noise and oscillations.
+
+![alt text](image-16.png)
+
+## AdaGrad
+
+AdaGrad (Adaptive Gradient Algorithm) adapts the learning rate per parameter over time by scaling it according to how often that parameter has been updated.
+
+If a parameter gets large gradients frequently → learning rate shrinks for it.
+
+If a parameter rarely gets updates → learning rate stays relatively larger.
+
+“Per-parameter learning rates” or “adaptive learning rates”
+
+## RMSProp: “Leak Adagrad”
+
+RMSProp says: “Instead of summing gradients forever, let’s keep an exponentially decaying average of past squared gradients.”
+![alt text](image-17.png)
+
+recent gradients matter more than old ones
+
+Effect:
+
+If gradients are large recently → learning rate shrinks
+
+If gradients are small → learning rate grows
+
+This balances step sizes across parameters → stable convergence.
+
+![alt text](image-18.png)
+
+## ADAM ( RMSprop + Momentum)
+
+Adam combines both ideas:
+
+Momentum part (moment1) → Smooths the gradient, so you don’t overreact to noise.
+
+RMSProp part (moment2) → Normalizes by the history of squared gradients, so you don’t step too far in steep directions.
+
+Update = Smooth direction (momentum) ÷ Safe step size (RMSProp)
+
+![alt text](image-19.png)
+
+# Optimization Algorithm Comparison
+
+![alt text](image-20.png)
+
+## Adam is a good default choice in many cases SGD+Momentum can outperform Adam but may require more tuning
