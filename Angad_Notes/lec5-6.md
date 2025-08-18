@@ -107,4 +107,5 @@ Most neural networks need nonconvex optimization:
 - Empirically it seems to
   work anyway
 - Active area of research
+
   ![alt text](image-30.png)
