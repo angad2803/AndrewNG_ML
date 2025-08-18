@@ -74,20 +74,19 @@ The multiclass SVM loss for a single example is:
 ```math
 L_i = \sum_{j \ne y_i} \max(0, s_j - s_{y_i} + 1)
 ```
-
 Where:
 
-- \( L_i \) is the loss for example \( i \)
-- \( x_i \) is the input image
-- \( y_i \) is the true label (e.g., "dog")
-- \( s = f(x_i, W) \) is the vector of scores for all classes
-- \( s\_{y_i} \) is the score for the correct class (\( y_i \), e.g., dog's score)
-- \( s_j \) is the score for some other class \( j \)
+- **\( L_i \)**: Loss for example \( i \)
+- **\( x_i \)**: Input image
+- **\( y_i \)**: True label (e.g., "dog")
+- **\( s = f(x_i, W) \)**: Vector of scores for all classes
+- **\( s_{y_i} \)**: Score for the correct class (\( y_i \), e.g., dog's score)
+- **\( s_j \)**: Score for some other class \( j \)
 - The sum is over all classes \( j \) not equal to the correct class \( y_i \)
-- The margin (here, 1) is a hyperparameter
+- The **margin** (here, 1) is a hyperparameter
 - The loss increases if incorrect classes have scores close to or higher than the correct class
 
-SVM loss = make the correct class not just win, but win by a safe margin.
+**SVM loss**: Make the correct class not just win, but win by a safe margin.
 
 Formula = hinge loss: punish if wrong classes are too close.
 
