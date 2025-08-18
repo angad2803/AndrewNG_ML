@@ -18,6 +18,14 @@ photocells to make a 400-pixel image
 Could learn to recognize letters of the alphabet
 Today we would recognize it as a linear classifier
 
-# Backpropagation
+## Backpropagation
 
 ![alt text](image-2.png)
+
+## ML Approach
+
+![alt text](image-3.png)
+
+## Hyperparameters
+
+![alt text](image-4.png)
