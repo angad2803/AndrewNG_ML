@@ -77,3 +77,41 @@ Testing → BN relies on the population statistics (approximated by running aver
 ![alt text](image-46.png)
 
 ![alt text](image-47.png)
+
+# Famous CNN Architectures
+
+## AlexNet
+
+227 x 227 inputs
+5 Convolutional layers
+Max pooling
+3 fully-connected layers
+ReLU nonlinearities
+
+![alt text](image-48.png)
+
+Recall: Output channels = number of filters
+
+![alt text](image-49.png)
+
+Pooling layers have no learnable parameters!
+
+![alt text](image-50.png)
+
+## ZFNet: A Bigger AlexNet
+
+![alt text](image-51.png)
+
+## VGG16
+
+![alt text](image-52.png)
+
+## Residual Networks
+
+As we add more layers, training accuracy should improve (since deeper networks can represent more complex functions).
+
+But in reality, after a certain depth, performance gets worse – training accuracy drops, gradients vanish, optimization becomes hard.
+
+✅ In short: ResNets work because they reformulate learning from “map input to output” → “map input to difference from output,” which is easier, stabler, and optimizes better.
+
+![alt text](image-53.png)
